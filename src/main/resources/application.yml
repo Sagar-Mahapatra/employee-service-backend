@@ -22,7 +22,7 @@ spring:
 logging:  file:    name: C:/Users/SAGAR/Desktop/LogFiles/employee-service.log       level:
     root: info
   pattern:
-    console: '%d{yyyy-MM-dd HH:mm:ss:SSS} %clr(%-5level) %C, -- %msg%n'     
+    console: '%d{yyyy-MM-dd HH:mm:ss:SSS} %clr(%-5level) %C, -- %msg%n'     file: '%d{yyyy-MM-dd HH:mm:ss:SSS} %C, -- %msg%n'
       
 app:
   messages:
