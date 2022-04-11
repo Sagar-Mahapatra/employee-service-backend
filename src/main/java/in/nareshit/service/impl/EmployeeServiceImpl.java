@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public Long saveEmployee(Employee e) {
-		System.out.println("saveEmployee in EmployeeServiceImpl executed");
+		log.info("saveEmployee in EmployeeServiceImpl executed");
 		e.setEmpCode(UUID.randomUUID().toString().substring(0, 7).toUpperCase());
 		Long id = repo.save(e).getId();
 		return id;
@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 		List<Employee> employees = repo.findAll();
 		log.info("List of Employee data in EmployeeServiceImpl: " + employees);
 		employees.stream().collect(Collectors.groupingBy(Employee::getEmpDept))
-				.forEach((dept, empl) -> System.out.println(dept + "=>" + empl));
+				.forEach((dept, empl) -> log.info(dept + "=>" + empl));
 		return employees;
 	}
 
@@ -129,7 +129,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
 	@Override
 	public List<Employee> getAllByCities(List<String> cities) {
-		System.out.println(cities);
+		log.info("entered into getAllByCities() in EmployeeServiceImpl: " + cities);
 		return repo.getAllByCities(cities);
 	}
 

@@ -32,10 +32,12 @@ import in.nareshit.payload.response.MessageResponse;
 import in.nareshit.repo.RoleRepository;
 import in.nareshit.repo.UserRepository;
 import in.nareshit.service.IEmployeeService;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(value = "/auth")
 @CrossOrigin(origins = "http://localhost:4200")
+@Slf4j
 public class LoginRestController {
 
 	@Autowired
@@ -58,8 +60,7 @@ public class LoginRestController {
 
 	@PostMapping("/token")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-		System.out.println(loginRequest.getUsername() + " : " + loginRequest.getPassword());
+		log.info(loginRequest.getUsername() + " : " + loginRequest.getPassword());
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -76,7 +77,7 @@ public class LoginRestController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody Employee emp) {
-		System.out.println("registerUser in LoginRestController executed");
+		log.info("registerUser in LoginRestController executed");
 		if (userRepository.existsByUsername(emp.getEmpEmail())) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
 		}

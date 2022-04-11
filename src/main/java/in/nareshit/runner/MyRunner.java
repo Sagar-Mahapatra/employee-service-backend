@@ -8,9 +8,11 @@ import in.nareshit.entity.ERole;
 import in.nareshit.entity.Role;
 import in.nareshit.repo.RoleRepository;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Component
+@Slf4j
 public class MyRunner implements CommandLineRunner {
 
 	@Autowired
@@ -21,7 +23,7 @@ public class MyRunner implements CommandLineRunner {
 		if (repo.findAll().isEmpty() || repo.findAll() == null) {
 			repo.save(new Role(ERole.ROLE_ADMIN));
 			repo.save(new Role(ERole.ROLE_USER));
-			System.out.println("ROLES INSERTED IN ROLE TABLE");
+			log.info("ROLES INSERTED IN ROLE TABLE");
 		}
 
 	}
